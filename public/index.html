@@ -1,0 +1,45 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Information</h1>
+        <form id="locationForm">
+            <input type="text" id="latitude" placeholder="Enter Latitude" required>
+            <input type="text" id="longitude" placeholder="Enter Longitude" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="weatherResult"></div>
+    </div>
+
+    <script>
+        document.getElementById('locationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const lat = document.getElementById('latitude').value;
+            const lon = document.getElementById('longitude').value;
+
+            fetch(`/weather?lat=${lat}&lon=${lon}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('weatherResult').innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        document.getElementById('weatherResult').innerHTML = `
+                            <h2>Weather in ${data.name}</h2>
+                            <p>Temperature: ${data.temp}°C</p>
+                            <p>Weather: ${data.description}</p>
+                            <p>Humidity: ${data.humidity}%</p>
+                        `;
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
