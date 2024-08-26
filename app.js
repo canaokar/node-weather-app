@@ -1,7 +1,7 @@
-// app.js
+// Imports
 const express = require('express');
 const axios = require('axios');
-require('dotenv').config();
+//require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,7 +18,8 @@ app.get('/weather', async (req, res) => {
     }
 
     try {
-        const apiKey = process.env.API_KEY;
+        //const apiKey = process.env.API_KEY;
+        const apiKey = 'MY_API_KEY';
         const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
         const response = await axios.get(url);
@@ -43,7 +44,8 @@ app.get('/api/weather', async (req, res) => {
     }
 
     try {
-        const apiKey = process.env.API_KEY;
+        //const apiKey = process.env.API_KEY;
+        const apiKey = 'MY_API_KEY';
         const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
         const response = await axios.get(url);
